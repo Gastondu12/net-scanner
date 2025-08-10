@@ -1,0 +1,83 @@
+Introduction
+Présentation du sujet choisi
+
+Le projet consiste à développer un outil capable de scanner une plage d’adresses IP pour détecter les adresses actives et inactives. L’outil doit également permettre un scan asynchrone pour améliorer la vitesse, avec une option avancée de détection des ports ouverts sur les IP actives.
+Objectifs et organisation du projet
+
+L’objectif principal est de créer un scanner réseau efficace et fiable, capable d’analyser une plage IP ou une liste d’adresses IP issues d’un fichier. Le projet est organisé en plusieurs modules distincts pour faciliter la maintenance et la réutilisation, avec :
+
+    Un module principal net_scanner.py pour l’interface CLI.
+
+    Un package net_scanner contenant la logique métier (ping, scan ports, gestion des résultats).
+
+    Des tests unitaires assurant une couverture supérieure à 95%.
+
+    Une documentation générée avec Sphinx et déployée via GitHub Pages.
+
+    Un pipeline CI/CD automatisé qui exécute tests, contrôle qualité et déploie la documentation.
+
+Développement
+Étapes principales réalisées
+
+    Définition des fonctionnalités : prise en charge du scan IP par plage ou fichier, avec ping asynchrone et scan optionnel des ports.
+
+    Implémentation asynchrone : utilisation de asyncio pour lancer les pings et les scans simultanément, réduisant le temps d’exécution.
+
+    Organisation du code : séparation en modules scanner.py et utils.py sous un package net_scanner.
+
+    Tests unitaires : couverture avec unittest et utilisation de coverage.py pour mesurer la couverture.
+
+    Documentation : rédaction de docstrings conformes à PEP 257, génération de docs avec Sphinx.
+
+    Pipeline CI/CD : mise en place d’un workflow GitHub Actions pour exécuter tests, analyse de code avec pylint, et déploiement de la doc.
+
+Problèmes rencontrés et solutions apportées
+
+    Ping asynchrone multi-plateforme : la commande ping varie selon le système d’exploitation (flags différents). La solution a été d’adapter la commande en détectant l’OS via platform.system() et d’ajuster les paramètres en conséquence.
+
+    Scan de ports rapide et fiable : gestion des timeout pour éviter les blocages lors du scan des ports fermés.
+
+    Structure du projet : s’assurer que la CLI, la logique métier et les tests soient bien séparés pour faciliter la maintenance.
+
+    Automatisation CI/CD : configuration fine du workflow GitHub Actions pour intégrer plusieurs étapes (tests, linting, doc) et éviter les erreurs bloquantes.
+
+Pipeline CI/CD
+Explication des étapes configurées dans le workflow
+
+Le pipeline automatisé est défini via un fichier YAML dans .github/workflows/ci.yml et comporte :
+
+    Installation des dépendances : installation des packages listés dans requirements.txt.
+
+    Lancement des tests unitaires : exécution via unittest avec génération d’un rapport de couverture via coverage.py.
+
+    Vérification qualité du code : analyse statique avec pylint, avec seuil minimum de 9.0/10.
+
+    Génération et déploiement de la documentation : génération de la doc Sphinx et déploiement automatique sur GitHub Pages.
+
+Comment le pipeline répond aux objectifs du projet
+
+Ce pipeline garantit que le code livré est testé, de bonne qualité et correctement documenté, assurant ainsi la fiabilité et la maintenabilité du projet. Il permet de détecter rapidement les régressions et d’automatiser les tâches répétitives.
+Conclusion et auto-évaluation
+Bilan personnel
+
+    Points réussis :
+
+        Mise en place d’un scan réseau asynchrone performant.
+
+        Bonne organisation du code avec séparation claire des responsabilités.
+
+        Couverture de test élevée et pipeline CI/CD fonctionnel.
+
+        Documentation complète et déployée automatiquement.
+
+    Points à améliorer :
+
+        Gestion plus fine des erreurs réseau et des exceptions.
+
+        Interface utilisateur plus riche (ex. : affichage en temps réel, export dans d’autres formats).
+
+        Étendre la détection des ports à un plus grand nombre de ports configurables.
+
+        Ajouter des tests d’intégration et des tests de charge.
+
+Ce projet m’a permis de renforcer mes compétences en programmation asynchrone, en automatisation CI/CD, et en structuration de projet Python professionnel.

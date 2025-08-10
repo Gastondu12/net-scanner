@@ -1,0 +1,4 @@
+coverage
+pylint>=2.15
+sphinx
+sphinx-rtd-theme
